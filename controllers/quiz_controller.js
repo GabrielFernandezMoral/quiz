@@ -16,11 +16,22 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 exports.index = function (req, res) {
-	models.Quiz.findAll().then(function (quizes) {
-		res.render('quizes/index.ejs', {
-			quizes: quizes
+	if(req.query.search === undefined) {
+		models.Quiz.findAll().then(function (quizes) {
+			res.render('quizes/index.ejs', {
+				quizes: quizes
+			});
 		});
-	});
+	} else {
+		var search = "%" + req.query.search + "%";
+		models.Quiz.findAll({where: ["pregunta like ?", search]}).then(
+			function (quizes) {
+				res.render('quizes/index.ejs', {
+					quizes: quizes
+				});
+			}
+		);
+	}
 };
 
 // GET /quizes/:id

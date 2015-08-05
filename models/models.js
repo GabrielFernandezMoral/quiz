@@ -40,6 +40,10 @@ sequelize.sync().then(function() {
 				respuesta: 'Roma'
 			});
 			Quiz.create({
+				pregunta: '¿En qué continente se encuentra Italia?',
+				respuesta: 'Europa'
+			});
+			Quiz.create({
 				pregunta: '¿Capital de Portugal?',
 				respuesta: 'Lisboa'
 			}).then(function () {
